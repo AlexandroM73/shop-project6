@@ -1,0 +1,264 @@
+<!-- contacts.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Контакты</title>
+  <!-- Подключение Bootstrap 5 через CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f9;
+    }
+    .sidebar {
+      width: 260px;
+      background-color: #121212;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      border-right: 1px solid #333;
+      flex-shrink: 0;
+    }
+    .sidebar h3 {
+      color: #fff;
+      margin-bottom: 20px;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+    .nav-link {
+      color: #a0a0a0;
+      padding: 10px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-link:hover, .nav-link.active {
+      background-color: #1f1f1f;
+      color: #fff;
+    }
+    .main-content {
+      flex: 1;
+      padding: 40px;
+      overflow-y: auto;
+      background-color: #f4f6f9;
+    }
+    .page-header {
+      margin-bottom: 40px;
+      text-align: left;
+      color: #333;
+    }
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-label {
+      font-weight: 500;
+      color: #495057;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .form-control {
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #ced4da;
+      transition: border-color 0.2s;
+    }
+    .form-control:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    }
+    .btn-submit {
+      background-color: #0d6efd;
+      color: white;
+      padding: 10px 24px;
+      border-radius: 6px;
+      border: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .btn-submit:hover {
+      background-color: #0b5ed7;
+    }
+    .contact-info h3 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .contact-info p {
+      color: #6c757d;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+    .profile-section {
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid #333;
+    }
+    .user-avatar {
+      width: 35px;
+      height: 35px;
+      background-color: #444;
+      color: #fff;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.8rem;
+      margin-right: 10px;
+    }
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 10px;
+      }
+      .nav-link {
+        white-space: nowrap;
+      }
+      .profile-section {
+        margin-top: 0;
+        padding-top: 0;
+        padding-left: 10px;
+        border-top: none;
+        border-left: 1px solid #333;
+      }
+      .main-content {
+        padding: 20px;
+      }
+      .contact-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Сайдбар (Меню) -->
+  <aside class="sidebar">
+    <div class="d-flex align-items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16"><path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-4.223 2.815A.5.5 0 0 1 3 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.223-2.815a.5.5 0 0 1 .777-.416V2a1 1 0 0 0-1-1z"/></svg>
+      <h3>Меню</h3>
+    </div>
+    <nav class="mt-3">
+      <a href="/" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16"><path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L8.707 1.5zM1 13V9.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V13h6V9.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V13a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1z"/></svg>
+        Главная
+      </a>
+      <a href="/categories" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags" viewBox="0 0 16 16"><path d="M7 0a2 2 0 0 1 2 2v12.13a.25.25 0 0 1-.41.17L6 12V2a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10.16l.17.17.5-.5V2a1 1 0 0 0-1-1z"/></svg>
+        Категории
+      </a>
+      <a href="#" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16"><path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.598l-1.5 7A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.40"/></svg>
+        Заказы
+      </a>
+      <a href="/contacts" class="nav-link active">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16"><path d="M13.5 14h-13v-2c0-.828.672-1.5 1.5-1.5h10c.828 0 1.5.672 1.5 1.5v2zM13.5 4c0 1.93-1.57 3.5-3.5 3.5s-3.5-1.57-3.5-3.5S8.07.5 9.999.5 13.5 2.07 13.5 4zM8 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+        Контакты
+      </a>
+    </nav>
+
+    <div class="profile-section">
+      <div class="d-flex align-items-center">
+        <div class="user-avatar">П</div>
+        <span class="fw-bold">Пользователь</span>
+      </div>
+      <div class="d-flex gap-2 mt-2">
+        <a href="#" class="text-decoration-none text-white small">Профиль</a>
+        <a href="#" class="text-decoration-none text-white small">Выход</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Основной контент -->
+  <main class="main-content">
+    <div class="page-header">
+      <h1>Контакты</h1>
+    </div>
+
+    <div class="contact-container">
+      <!-- Форма обратной связи -->
+      <form id="contactForm" action="/api/data" method="POST">
+        <div class="form-group">
+          <label for="name" class="form-label">Имя</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Введите ваше имя" required>
+        </div>
+        <div class="form-group">
+          <label for="email" class="form-label">Почта</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="example@mail.com" required>
+        </div>
+        <div class="form-group">
+          <label for="message" class="form-label">Сообщение</label>
+          <textarea class="form-control" id="message" name="message" rows="5" placeholder="Введите ваше сообщение" required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Отправить</button>
+      </form>
+
+      <!-- Блок с информацией -->
+      <div class="contact-info">
+        <h3>Наши контакты</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>While these feedback styles cannot be styled with CSS, you can still customize the feedback text through JavaScript.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Скрипт для обработки отправки формы -->
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch('/api/data', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          alert('Данные успешно отправлены: ' + JSON.stringify(result.received_data, null, 2));
+          this.reset();
+        } else {
+          alert('Ошибка отправки: ' + result.message);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Произошла ошибка при отправке формы.');
+      }
+    });
+  </script>
+</body>
+</html>
