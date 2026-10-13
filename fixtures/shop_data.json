@@ -1,0 +1,42 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Электроника",
+      "description": "Телефоны, ноутбуки"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Одежда",
+      "description": "Футболки, джинсы"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "Смартфон X",
+      "description": "Хороший смартфон",
+      "category": 1,
+      "price": 299.99,
+      "created_at": "2026-10-13T17:59:51.245797+00:00",
+      "updated_at": "2026-10-13T17:59:51.245831+00:00"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "Футболка базовая",
+      "description": "Белая футболка",
+      "category": 2,
+      "price": 19.99,
+      "created_at": "2026-10-13T17:59:58.331349+00:00",
+      "updated_at": "2026-10-13T17:59:58.331366+00:00"
+    }
+  }
+]
