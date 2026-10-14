@@ -5,8 +5,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # сюда добавь include для твоего приложения, например:
-    # path('', include('catalog.urls')),
+    path('', include('catalog.urls')),  # Все пути для товаров и главной берём из catalog
 ]
 
 # Отдаем медиа-файлы только в режиме разработки
