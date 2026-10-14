@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <!-- ВАЖНО: эта строка должна быть здесь -->
+    {% load static %}
+
+    <title>{% block title %}Магазин{% endblock %}</title>
+    {% block styles %}
+        <!-- Теперь этот тег сработает -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% endblock %}
+</head>
+<body>
+    <header>
+        {% include 'menu.html' %}
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        {% block footer %}{% endblock %}
+    </footer>
+</body>
+</html>

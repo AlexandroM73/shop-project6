@@ -1,7 +1,31 @@
-.idea/
+# Виртуальное окружение
 venv/
+media/
+
+# IDE
+.idea/
+.vscode/
+
+# Python кэши и байт‑код
 __pycache__/
-env/
-*.sqlite*
 *.pyc
+
+# База данных (SQLite)
+*.sqlite*
+
+# Логи
+*.log
+
+# Переменные окружения
+.env
+
+# macOS
 .DS_Store
+
+# Тесты и линтеры (опционально, но полезно)
+.pytest_cache/
+.mypy_cache/
+
+# Временные папки
+tmp/
+temp/

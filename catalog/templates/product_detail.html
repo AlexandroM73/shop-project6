@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.title }} — Магазин{% endblock %}
+
+{% block content %}
+    <article class="product-card">
+        <h1>{{ object.title }}</h1>
+
+        {% if object.image %}
+            <img src="{{ object.image.url }}" alt="{{ object.title }}" class="product-image">
+        {% endif %}
+
+        <p><strong>Цена:</strong> {{ object.price }} ₽</p>
+        <p><strong>Описание:</strong></p>
+        <p>{{ object.description }}</p>
+
+        <a href="{% url 'index' %}" class="btn">← Назад к списку</a>
+    </article>
+{% endblock %}
