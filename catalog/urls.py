@@ -1,8 +1,8 @@
 from django.urls import path
-from . import views
-from .views import ProductDetailView
+from .views import index, ProductDetailView, ContactsView
 
 urlpatterns = [
-    path('', views.index, name='index'),                 # Главная: /
-    path('products/<int:pk>/', ProductDetailView.as_view(), name='product_detail'),  # Товар: /products/1/
+    path('', index, name='index'),
+    path('<int:pk>/', ProductDetailView.as_view(), name='product_detail'),
+    path('contacts/', ContactsView.as_view(), name='contacts'),
 ]

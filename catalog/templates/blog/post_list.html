@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Блог — Магазин{% endblock %}
+
+{% block content %}
+    <h1>Блог</h1>
+
+    {% for post in posts %}
+        <article class="product-card">
+            <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
+            {% if post.preview_image %}
+                <img src="{{ post.preview_image.url }}" alt="{{ post.title }}" class="product-image" style="max-width: 150px;">
+            {% endif %}
+            <p>{{ post.content|truncatechars:150 }}</p>
+            <p><small>Просмотров: {{ post.views_count }} • Дата: {{ post.created_at|date:"d.m.Y" }}</small></p>
+        </article>
+    {% empty %}
+        <p>Нет опубликованных записей.</p>
+    {% endfor %}
+
+    <!-- Пагинация (если paginate_by > 0) -->
+    {% if is_paginated %}
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">← Предыдущая</a>
+            {% endif %}
+            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Следующая →</a>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}
