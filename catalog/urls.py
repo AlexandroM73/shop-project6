@@ -1,5 +1,14 @@
 from django.urls import path
-from .views import ProductListView, ProductDetailView, ProductCreateView, ProductUpdateView, ProductDeleteView
+from .views import (
+    index,                # FBV: главная страница
+    ContactsView,         # CBV: контакты
+    ProductListView,
+    ProductDetailView,
+    ProductCreateView,
+    ProductUpdateView,
+    ProductDeleteView,
+    unpublish_product,   # <-- ДОБАВЬ ЭТУ СТРОКУ: функция для снятия с публикации
+)
 
 urlpatterns = [
     # FBV главная
@@ -18,4 +27,7 @@ urlpatterns = [
     path('products/create/', ProductCreateView.as_view(), name='product_create'),
     path('product/<int:pk>/edit/', ProductUpdateView.as_view(), name='product_edit'),
     path('product/<int:pk>/delete/', ProductDeleteView.as_view(), name='product_delete'),
+
+    # НОВАЯ СТРОКА: снятие с публикации (только для модераторов)
+    path('product/<int:pk>/unpublish/', unpublish_product, name='unpublish_product'),
 ]
