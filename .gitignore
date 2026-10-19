@@ -17,7 +17,7 @@ __pycache__/
 *.log
 
 # Переменные окружения
-.env
+.env.broken
 
 # macOS
 .DS_Store
