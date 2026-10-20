@@ -1,13 +1,14 @@
 from django.urls import path
 from .views import (
-    index,                # FBV: главная страница
-    ContactsView,         # CBV: контакты
+    index,
+    ContactsView,
     ProductListView,
     ProductDetailView,
     ProductCreateView,
     ProductUpdateView,
     ProductDeleteView,
-    unpublish_product,   # <-- ДОБАВЬ ЭТУ СТРОКУ: функция для снятия с публикации
+    unpublish_product,
+    category_products_list,  # <-- ДОБАВЛЕНО: view для категории с кэшем
 )
 
 urlpatterns = [
@@ -28,6 +29,9 @@ urlpatterns = [
     path('product/<int:pk>/edit/', ProductUpdateView.as_view(), name='product_edit'),
     path('product/<int:pk>/delete/', ProductDeleteView.as_view(), name='product_delete'),
 
-    # НОВАЯ СТРОКА: снятие с публикации (только для модераторов)
+    # Снятие с публикации (только для модераторов)
     path('product/<int:pk>/unpublish/', unpublish_product, name='unpublish_product'),
+
+    # НОВАЯ СТРОКА: товары категории (с низкоуровневым кэшем)
+    path('category/<int:category_id>/', category_products_list, name='category_products'),
 ]

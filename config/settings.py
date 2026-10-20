@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'catalog',
     'blog',
     'accounts',
+    # 'django_redis',
 ]
 
 MIDDLEWARE = [
@@ -64,6 +65,14 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
+
 
 
 
