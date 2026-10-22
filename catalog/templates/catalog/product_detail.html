@@ -1,0 +1,17 @@
+<!-- Кнопка редактирования: только владелец -->
+{% if product.owner == user %}
+    <a href="{% url 'product_edit' product.pk %}" class="btn btn-primary">Редактировать</a>
+{% endif %}
+
+<!-- Кнопка удаления: владелец ИЛИ модератор -->
+{% if can_delete %}
+    <form method="post" action="{% url 'product_delete' product.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Удалить товар</button>
+    </form>
+{% endif %}
+
+<!-- Кнопка снятия с публикации: только модераторы -->
+{% if can_unpublish %}
+    <a href="{% url 'unpublish_product' product.pk %}" class="btn btn-warning">Снять с публикации</a>
+{% endif %}

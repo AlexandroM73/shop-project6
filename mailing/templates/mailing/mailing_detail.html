@@ -1,0 +1,103 @@
+<!--&lt;!&ndash; mailing/templates/mailing/mailing_detail.html &ndash;&gt;-->
+<!--{% extends "base.html" %}-->
+
+<!--{% block title %}Рассылка #{{ mailing.id }}{% endblock %}-->
+
+<!--{% block content %}-->
+<!--<div class="container mt-4">-->
+<!--    <h2>Рассылка #{{ mailing.id }}</h2>-->
+
+<!--    &lt;!&ndash; Блок сообщений Django (обязательно!) &ndash;&gt;-->
+<!--    {% if messages %}-->
+<!--        <ul class="messages">-->
+<!--            {% for message in messages %}-->
+<!--                <li class="{{ message.tags }}">{{ message }}</li>-->
+<!--            {% endfor %}-->
+<!--        </ul>-->
+<!--    {% endif %}-->
+
+<!--    <div class="card mb-3">-->
+<!--        <div class="card-body">-->
+<!--            <p><strong>Статус:</strong>-->
+<!--                <span class="badge bg-{% if mailing.status == 'Запущена' %}success{% elif mailing.status == 'Завершена' %}secondary{% else %}warning{% endif %}">-->
+<!--                    {{ mailing.status }}-->
+<!--                </span>-->
+<!--            </p>-->
+<!--            <p><strong>Тема письма:</strong> {{ mailing.message.subject }}</p>-->
+<!--            <p><strong>Текст письма:</strong></p>-->
+<!--            <blockquote class="blockquote">-->
+<!--                {{ mailing.message.body|linebreaks }}-->
+<!--            </blockquote>-->
+
+<!--            <p><strong>Период отправки:</strong>-->
+<!--                {{ mailing.start_time|date:"d.m.Y H:i" }} — {{ mailing.end_time|date:"d.m.Y H:i" }}-->
+<!--            </p>-->
+
+<!--            <p><strong>Получатели:</strong></p>-->
+<!--            <ul>-->
+<!--                {% for recipient in mailing.recipients.all %}-->
+<!--                    <li>{{ recipient.full_name }} ({{ recipient.email }})</li>-->
+<!--                {% empty %}-->
+<!--                    <li>Нет получателей</li>-->
+<!--                {% endfor %}-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Кнопка запуска рассылки &ndash;&gt;-->
+<!--    <div style="margin-top: 20px;">-->
+<!--        <a href="{% url 'start_mailing' pk=mailing.pk %}" class="btn btn-primary">-->
+<!--            🚀 Запустить рассылку-->
+<!--        </a>-->
+<!--        <a href="{% url 'mailing_list' %}" class="btn btn-secondary">Назад к списку</a>-->
+<!--    </div>-->
+<!--</div>-->
+<!--{% endblock %}-->
+
+
+<!-- mailing/templates/mailing/mailing_detail.html -->
+
+<h1>Рассылка #{{ mailing.id }}</h1>
+<p><strong>Статус:</strong> {{ mailing.status }}</p>
+<p><strong>Тема письма:</strong> {{ mailing.message.subject }}</p>
+<p><strong>Период:</strong> с {{ mailing.start_time }} до {{ mailing.end_time }}</p>
+
+<!-- === НОВАЯ ЧАСТЬ: КНОПКА ЗАПУСКА === -->
+<form method="post" action="{% url 'start_mailing' mailing.pk %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">🚀 Запустить рассылку</button>
+</form>
+<hr>
+
+<!-- === НОВАЯ ЧАСТЬ: ТАБЛИЦА ИСТОРИИ ПОПЫТОК === -->
+<h3>История попыток отправки</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Получатель (Email)</th>
+            <th>Статус</th>
+            <th>Время попытки</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for attempt in mailing.attempts.all %}
+        <tr>
+            <td>{{ attempt.recipient.email }}</td>
+            <td>
+                {% if attempt.status == 'Успешно' %}
+                    <span class="badge bg-success">{{ attempt.status }}</span>
+                {% else %}
+                    <span class="badge bg-danger">{{ attempt.status }}</span>
+                {% endif %}
+            </td>
+            <td>{{ attempt.attempt_time }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3" class="text-muted">Пока нет попыток отправки для этой рассылки.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'mailing_list' %}" class="btn btn-secondary">← Назад к списку рассылок</a>
