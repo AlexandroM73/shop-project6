@@ -1,0 +1,104 @@
+<!-- mailing/templates/mailing/dashboard.html -->
+{% extends "base.html" %}
+
+{% block title %}Статистика рассылок{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Статистика рассылок</h2>
+
+    <!-- Карточки по рассылкам и получателям -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Всего рассылок</h5>
+                    <p class="card-text display-6">{{ total_mailings|default:0 }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Активных рассылок</h5>
+                    <p class="card-text display-6">{{ active_mailings|default:0 }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Уникальных получателей</h5>
+                    <p class="card-text display-6">{{ unique_recipients|default:0 }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- НОВЫЙ БЛОК: статистика попыток отправки -->
+    <hr>
+    <h3>Статистика попыток отправки</h3>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Всего попыток</h5>
+                    <p class="card-text display-6">{{ total_attempts|default:0 }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Успешных</h5>
+                    <p class="card-text display-6">{{ success_attempts|default:0 }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Неудачных</h5>
+                    <p class="card-text display-6">{{ failed_attempts|default:0 }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Конец блока статистики попыток -->
+
+    <hr>
+
+    <h3>Последние рассылки</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Тема письма</th>
+                <th>Статус</th>
+                <th>Получателей</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mailing in mailings %}
+            <tr>
+                <td>{{ mailing.id }}</td>
+                <td>{{ mailing.message.subject }}</td>
+                <td>
+                    <span class="badge bg-{% if mailing.status == 'Запущена' %}success{% elif mailing.status == 'Ошибка' %}danger{% else %}secondary{% endif %}">
+                        {{ mailing.status }}
+                    </span>
+                </td>
+                <td>{{ mailing.recipients.count }}</td>
+                <td>
+                    <a href="{% url 'mailing_detail' pk=mailing.pk %}" class="btn btn-sm btn-outline-primary">Подробнее</a>
+                    <a href="{% url 'mailing_update' pk=mailing.pk %}" class="btn btn-sm btn-outline-secondary">Изменить</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5" class="text-center">Рассылок пока нет</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

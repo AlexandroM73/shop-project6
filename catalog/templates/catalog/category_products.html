@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Категория: {{ category.name }}{% endblock %}
+
+{% block content %}
+<h1>{{ category.name }}</h1>
+
+<div class="products-grid">
+    {% if products %}
+        {% for product in products %}
+            <div class="product-card">
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.price }} ₽</p>
+
+                {% if product.image %}
+                    <!-- Если image — это строка URL, просто выводим её -->
+                    <img src="{{ product.image }}" alt="{{ product.name }}" style="max-width: 100%;">
+                {% endif %}
+
+                <a href="{% url 'product_detail' product.id %}" class="btn">Подробнее</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>В этой категории пока нет опубликованных товаров.</p>
+    {% endif %}
+</div>
+{% endblock %}

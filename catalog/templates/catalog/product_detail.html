@@ -4,7 +4,7 @@
 {% endif %}
 
 <!-- Кнопка удаления: владелец ИЛИ модератор -->
-{% if product.owner == user or user.has_perm('catalog.delete_product') %}
+{% if can_delete %}
     <form method="post" action="{% url 'product_delete' product.pk %}">
         {% csrf_token %}
         <button type="submit" class="btn btn-danger">Удалить товар</button>
@@ -12,6 +12,6 @@
 {% endif %}
 
 <!-- Кнопка снятия с публикации: только модераторы -->
-{% if user.has_perm('catalog.can_unpublish_product') %}
+{% if can_unpublish %}
     <a href="{% url 'unpublish_product' product.pk %}" class="btn btn-warning">Снять с публикации</a>
 {% endif %}
